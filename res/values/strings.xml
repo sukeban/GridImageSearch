@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GridImageSearch</string>
+    <string name="save">Save</string>
+    <string name="title_activity_settings">Settings</string>
+	<string-array name="sizes"><item >Small</item><item >Medium</item><item >Large</item></string-array>
+	<string-array name="colors"><item >Red</item><item >Orange</item><item >Yellow</item><item >Green</item><item >Teal</item><item >Blue</item></string-array>
+	<string-array name="type"><item >Face</item><item >Photo</item><item >Clip art</item><item >Line drawing</item><item >Animated</item></string-array>
+	<string name="search_prompt">Enter search query</string>
+	<string name="image_title_label">Image Title</string>
+</resources>
