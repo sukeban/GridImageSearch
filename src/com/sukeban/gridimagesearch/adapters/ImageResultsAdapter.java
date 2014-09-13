@@ -13,6 +13,7 @@ import com.sukeban.gridimagesearch.models.ImageResult;
 //import android.R;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class ImageResultsAdapter extends
 		ivImage.setImageResource(0);
 		imageLoader.displayImage(imageInfo.thumbUrl, ivImage);
 		
-		tvTitle.setText(imageInfo.title);
+		tvTitle.setText(Html.fromHtml(imageInfo.title));
 		
 		return convertView;
 	}

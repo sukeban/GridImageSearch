@@ -4,9 +4,33 @@
     <string name="app_name">GridImageSearch</string>
     <string name="save">Save</string>
     <string name="title_activity_settings">Settings</string>
-	<string-array name="sizes"><item >Small</item><item >Medium</item><item >Large</item></string-array>
-	<string-array name="colors"><item >Red</item><item >Orange</item><item >Yellow</item><item >Green</item><item >Teal</item><item >Blue</item></string-array>
-	<string-array name="type"><item >Face</item><item >Photo</item><item >Clip art</item><item >Line drawing</item><item >Animated</item></string-array>
-	<string name="search_prompt">Enter search query</string>
-	<string name="image_title_label">Image Title</string>
+
+    <string-array name="sizes">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
+    <string-array name="colors">
+        <item>Red</item>
+        <item>Orange</item>
+        <item>Yellow</item>
+        <item>Green</item>
+        <item>Teal</item>
+        <item>Blue</item>
+    </string-array>
+    <string-array name="type">
+        <item>Face</item>
+        <item>Photo</item>
+        <item>Clip art</item>
+        <item>Line drawing</item>
+        <item>Animated</item>
+    </string-array>
+
+    <string name="search_prompt">Enter search query</string>
+    <string name="image_title_label">Image Title</string>
+    <string name="title_activity_image">ImageActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_image_display">Full Image</string>
+    <string name="action_settings">Settings</string>
+
 </resources>

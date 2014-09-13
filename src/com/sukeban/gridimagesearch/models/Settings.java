@@ -1,4 +1,4 @@
-package com.sukeban.gridimagesearch;
+package com.sukeban.gridimagesearch.models;
 
 import java.io.Serializable;
 

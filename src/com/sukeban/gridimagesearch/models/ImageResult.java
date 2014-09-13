@@ -1,16 +1,21 @@
 package com.sukeban.gridimagesearch.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ImageResult {
+public class ImageResult implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	public String fullUrl;
 	public String thumbUrl;
+	
 	public String title;
+	
 	public String width;
 	public String height;
 	

@@ -1,5 +1,7 @@
 package com.sukeban.gridimagesearch;
 
+import com.sukeban.gridimagesearch.models.Settings;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

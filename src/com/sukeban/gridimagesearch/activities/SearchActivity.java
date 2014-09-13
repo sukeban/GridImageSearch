@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.sukeban.gridimagesearch.R;
-import com.sukeban.gridimagesearch.Settings;
 import com.sukeban.gridimagesearch.SettingsActivity;
 import com.sukeban.gridimagesearch.R.id;
 import com.sukeban.gridimagesearch.R.layout;
 import com.sukeban.gridimagesearch.R.menu;
 import com.sukeban.gridimagesearch.adapters.ImageResultsAdapter;
 import com.sukeban.gridimagesearch.models.ImageResult;
+import com.sukeban.gridimagesearch.models.Settings;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,6 +26,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnTouchListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
@@ -60,6 +63,15 @@ public class SearchActivity extends Activity {
     private void setupViews() {
     	etSearch = (EditText)findViewById(R.id.etSearch);
     	gvResults = (GridView)findViewById(R.id.gvResults);
+    	gvResults.setOnItemClickListener(new OnItemClickListener(){
+    		@Override
+    		public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+    			Intent i = new Intent(SearchActivity.this, ImageDisplayActivity.class);
+    			ImageResult result = imageResults.get(position);
+    			i.putExtra("result", result);
+    			startActivity(i);
+    		}
+    	});
 	}
 
 	@Override
@@ -83,7 +95,7 @@ public class SearchActivity extends Activity {
     			this.settings = settings;
     			
     			// settings view dismisssed 
-    			// get the settings values and use them in search
+    			// TODO: get the settings values and use them in search
     			
     	    	Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
     		}
@@ -95,7 +107,7 @@ public class SearchActivity extends Activity {
     	String query = etSearch.getText().toString();
         AsyncHttpClient client = new AsyncHttpClient();
     	
-        // get the settings values and use them in search    	
+        // TODO: get the settings values and use them in search    	
 
         String searchUrl = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + "&rsz=8";
         client.get(searchUrl, new JsonHttpResponseHandler(){
@@ -111,7 +123,7 @@ public class SearchActivity extends Activity {
         			e.printStackTrace();
         		}
         		
-        		Log.i("INFO", imageResults.toString());
+        		//Log.i("INFO", imageResults.toString());
         	}        	
         });
 		
