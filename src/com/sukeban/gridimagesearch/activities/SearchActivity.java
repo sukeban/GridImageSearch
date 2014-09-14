@@ -41,6 +41,7 @@ public class SearchActivity extends Activity {
 	private ArrayList<ImageResult> imageResults;
 	private ImageResultsAdapter aImageResults;
 	private Context toastContext;
+	private short pageCounter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,8 @@ public class SearchActivity extends Activity {
         settings.siteFilter = "";
         
         toastContext = this;
+        
+        pageCounter = 0;
     }
     
     private void setupViews() {
@@ -94,6 +97,10 @@ public class SearchActivity extends Activity {
     
     public void performSearch(final boolean clear) {
 
+    	if (clear == true){
+    		pageCounter = 0;
+    	}
+    	
     	String query = etSearch.getText().toString();
     	if (query.isEmpty()){
     		return;
@@ -103,8 +110,11 @@ public class SearchActivity extends Activity {
         String colorFiler = settings.colorFilter;
         String imageType = settings.imageType;
         String siteFilter = settings.siteFilter;
+        
+        short maxQuerySize = 8;
+        short maxQueryPages = 9;
 
-        String searchUrl = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + "&rsz=8";
+        String searchUrl = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + "&rsz=" + maxQuerySize;
         if (!imageSize.isEmpty()){
         	String imageSizeAddition = "&imgsz=" + imageSize;
         	searchUrl += imageSizeAddition;
@@ -119,13 +129,16 @@ public class SearchActivity extends Activity {
         }
         if (!siteFilter.isEmpty()){
         	String siteFilterAddition = "&as_sitesearch="+ siteFilter;
-        	searchUrl += siteFilterAddition;;
+        	searchUrl += siteFilterAddition;
         }
        
-        // + "start=" cursor;
-        
-        // TODO: add the cursor to the query
-        
+        if (pageCounter > maxQuerySize*maxQueryPages){ // TODO: or no more results returned from API
+			Toast.makeText(toastContext, "No more results", Toast.LENGTH_SHORT).show();
+        	return;
+        }
+        String pageAddition = "&start=" + pageCounter;
+        searchUrl += pageAddition;
+                
         AsyncHttpClient client = new AsyncHttpClient();
 
         client.get(searchUrl, new JsonHttpResponseHandler(){
@@ -146,6 +159,7 @@ public class SearchActivity extends Activity {
         			 	imageResults.clear();
         			}
         			aImageResults.addAll(ImageResult.fromJSONArray(imageResultsJson));
+        			pageCounter+=imageResultsJson.length();
         		 
         		} catch (JSONException e){
         			e.printStackTrace();
