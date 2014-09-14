@@ -37,6 +37,7 @@ public class SearchActivity extends Activity {
 	private Settings settings;
 	private EditText etSearch;
 	private GridView gvResults;
+	private EndlessGridViewScrollListener listener;
 	private ArrayList<ImageResult> imageResults;
 	private ImageResultsAdapter aImageResults;
 	private Context toastContext;
@@ -51,7 +52,9 @@ public class SearchActivity extends Activity {
         imageResults = new ArrayList<ImageResult>();
         aImageResults = new ImageResultsAdapter(this, imageResults);
         gvResults.setAdapter(aImageResults);
-        //gvResults.setOnScrollListener(new EndlessGridViewScrollListener()); // TODO: this crashes the app
+        listener = new EndlessGridViewScrollListener();
+        listener.setSearchActivity(this);
+        gvResults.setOnScrollListener(listener);
 
         settings = new Settings();
         settings.imageSize = "";
@@ -72,7 +75,6 @@ public class SearchActivity extends Activity {
     			ImageResult result = imageResults.get(position);
     			i.putExtra("result", result);
     			startActivity(i);
-    			// TODO: why is query blank when I go back?
     		}
     	});
 	}
@@ -93,43 +95,40 @@ public class SearchActivity extends Activity {
     public void performSearch(final boolean clear) {
 
     	String query = etSearch.getText().toString();
-    	   
-        Intent i = new Intent(this, SettingsActivity.class);
-		Settings s = (Settings) i.getSerializableExtra("settings");
-		if (s != null){
-			// TODO: copy over the data from the object
-		}
-	
+    	if (query.isEmpty()){
+    		return;
+    	}
+    	   	
         String imageSize = settings.imageSize;
         String colorFiler = settings.colorFilter;
         String imageType = settings.imageType;
         String siteFilter = settings.siteFilter;
 
-       String searchUrl = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + "&rsz=8";
-       if (!imageSize.isEmpty()){
-    	   String imageSizeAddition = "&imgsz=" + imageSize;
-    	   searchUrl += imageSizeAddition;
-       }
-       if (!colorFiler.isEmpty()){
-    	   String colorFilterAddition = "&imgcolor=" + colorFiler;
-    	   searchUrl += colorFilterAddition;
-       }
-       if (!imageType.isEmpty()){
-    	   String imageTypeAddition = "&imgtype=" + imageType;
-    	   searchUrl += imageTypeAddition;
-       }
-       if (!siteFilter.isEmpty()){
-    	   String siteFilterAddition = "&as_sitesearch="+ siteFilter;
-    	   searchUrl += siteFilterAddition;;
-       }
+        String searchUrl = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + "&rsz=8";
+        if (!imageSize.isEmpty()){
+        	String imageSizeAddition = "&imgsz=" + imageSize;
+        	searchUrl += imageSizeAddition;
+        }
+        if (!colorFiler.isEmpty()){
+        	String colorFilterAddition = "&imgcolor=" + colorFiler;
+        	searchUrl += colorFilterAddition;
+        }
+        if (!imageType.isEmpty()){
+        	String imageTypeAddition = "&imgtype=" + imageType;
+        	searchUrl += imageTypeAddition;
+        }
+        if (!siteFilter.isEmpty()){
+        	String siteFilterAddition = "&as_sitesearch="+ siteFilter;
+        	searchUrl += siteFilterAddition;;
+        }
        
         // + "start=" cursor;
         
         // TODO: add the cursor to the query
         
-       AsyncHttpClient client = new AsyncHttpClient();
+        AsyncHttpClient client = new AsyncHttpClient();
 
-       client.get(searchUrl, new JsonHttpResponseHandler(){
+        client.get(searchUrl, new JsonHttpResponseHandler(){
         	@Override
         	public void onSuccess(int statusCode, Header[] headers, org.json.JSONObject response){
         		//Log.d("DEBUG",response.toString());
@@ -147,9 +146,6 @@ public class SearchActivity extends Activity {
         			 	imageResults.clear();
         			}
         			aImageResults.addAll(ImageResult.fromJSONArray(imageResultsJson));
-        		 
-        			// TODO: do you need to update the EndlessScrollListener parameters to get it to fire again?
-        			// or does the adapter know what to do since we dded items
         		 
         		} catch (JSONException e){
         			e.printStackTrace();
@@ -179,7 +175,7 @@ public class SearchActivity extends Activity {
     }
     
     public void getMore() {
-    	
+    	this.performSearch(false);
     }
     
     public void onImageSearch(View v) {
