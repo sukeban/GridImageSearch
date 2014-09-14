@@ -6,24 +6,27 @@
     <string name="title_activity_settings">Settings</string>
 
     <string-array name="sizes">
-        <item>Small</item>
-        <item>Medium</item>
-        <item>Large</item>
+        <item></item>
+        <item>small</item>
+        <item>medium</item>
+        <item>large</item>
     </string-array>
     <string-array name="colors">
-        <item>Red</item>
-        <item>Orange</item>
-        <item>Yellow</item>
-        <item>Green</item>
-        <item>Teal</item>
-        <item>Blue</item>
+        <item></item>
+        <item>red</item>
+        <item>orange</item>
+        <item>yellow</item>
+        <item>green</item>
+        <item>teal</item>
+        <item>blue</item>
     </string-array>
     <string-array name="type">
-        <item>Face</item>
-        <item>Photo</item>
-        <item>Clip art</item>
-        <item>Line drawing</item>
-        <item>Animated</item>
+        <item></item>
+        <item>face</item>
+        <item>photo</item>
+        <item>clipart</item>
+        <item>lineart</item>
+        <item>animated</item>
     </string-array>
 
     <string name="search_prompt">Enter search query</string>

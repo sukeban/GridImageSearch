@@ -4,9 +4,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.sukeban.gridimagesearch.R;
-import com.sukeban.gridimagesearch.R.id;
-import com.sukeban.gridimagesearch.R.layout;
-import com.sukeban.gridimagesearch.R.menu;
 import com.sukeban.gridimagesearch.models.ImageResult;
 
 import android.app.Activity;
@@ -23,7 +20,7 @@ public class ImageDisplayActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_image_display);
-		//TODO: hide but how back getActionBar().hide();
+		getActionBar().hide();
 		
 		ImageResult result = (ImageResult)getIntent().getSerializableExtra("result");
 		String url = result.fullUrl;
@@ -41,7 +38,7 @@ public class ImageDisplayActivity extends Activity {
 		
 		imageLoader.displayImage(url, imImageResult);
 		
-		// TODO: display something while it loads
+		// TODO: display something while it loads not the launcher icon
 	}
 
 	@Override
