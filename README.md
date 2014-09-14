@@ -22,7 +22,8 @@ Completed user stories:
 Notes:
 There are a few fixes needed:
   * [x]Typing return in the search query text field crashes the app.
-  * [x]It would be better to show a spinner in the image view while the image loads.
+  * [x]It would be better to show a spinner in the image view while the image loads. 
+ * [x]And when the view is being reused, clear the image right away, right now it switches from the old image to the new one.
 
 Walkthrough of all user stories:
 
