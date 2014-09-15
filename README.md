@@ -26,6 +26,7 @@ There are a few fixes needed:
  * [x] Typing return in the search query text field crashes the app.
  * [x] It would be better to show a spinner in the image view while the image loads. Right now it just pops in.
  * [x] And when the grid view item is being reused, I should clear the image right away, right now it switches from the old image to the new one.
+ * [x] The spinner widths are kinda whack. I need to figure out how to fix them. 
 
 Walkthrough of all user stories:
 
